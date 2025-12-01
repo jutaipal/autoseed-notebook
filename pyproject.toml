@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "autoseed"
+version = "2.2.0"
+description = "Autoseed v2.2 with compiled C tools and Jupyter notebook interface"
+authors = [{ name="Jussi Taipale" }]
+requires-python = ">=3.8"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+autoseed = ["bin/*", "notebooks/*.ipynb"]
