@@ -4,19 +4,33 @@ from setuptools.command.build_py import build_py
 
 # (binary_name, repo_url, c_filename)
 REPOS = [
-    ("localmax-motif",
-     "https://github.com/jutaipal/kmercount_with_localmax/archive/refs/heads/main.tar.gz",
-     "localmax-motif.c"),
-    ("seedextender",
-     "https://github.com/jutaipal/seedextender/archive/refs/heads/main.tar.gz",
-     "seedextender.c"),
-    ("motifsimilarity",
-     "https://github.com/jutaipal/motifsimilarity/archive/refs/heads/main.tar.gz",
-     "motifsimilarity.c"),
-    ("genint-PWM",
-     "https://github.com/jutaipal/multinomial_motif_generator/archive/refs/heads/main.tar.gz",
-     "genint-PWM.c"),
+    {
+        "name": "localmax-motif",
+        "url": "https://github.com/jutaipal/localmax-motif/archive/refs/heads/main.tar.gz",
+        "c_file": "localmax-motif.c",
+        "output": "localmax-motif",
+    },
+    {
+        "name": "seedextender",
+        "url": "https://github.com/jutaipal/seedextender/archive/refs/heads/main.tar.gz",
+        "c_file": "seedextender.c",
+        "output": "seedextender",
+    },
+    {
+        "name": "motifsimilarity",
+        "url": "https://github.com/jutaipal/motifsimilarity/archive/refs/heads/main.tar.gz",
+        "c_file": "motifsimilarity.c",
+        "output": "motifsimilarity",
+    },
+    {
+        # genint-PWM lives in the genint repo, branch "newmain"
+        "name": "genint-PWM",
+        "url": "https://github.com/jutaipal/genint/archive/refs/heads/newmain.tar.gz",
+        "c_file": "genint-PWM.c",
+        "output": "genint-PWM",
+    },
 ]
+
 
 
 class BuildC(build_py):
