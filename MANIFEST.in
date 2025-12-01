@@ -1,0 +1,2 @@
+include src/autoseed/notebooks/*.ipynb
+recursive-include src/autoseed/bin *
