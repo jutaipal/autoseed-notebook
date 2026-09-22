@@ -48,8 +48,8 @@ class BuildC(Command):
             ),
             (
                 "genint-PWM",
-                "https://github.com/jutaipal/genint/archive/7178704ace9c3edf5fe3ad78b6694d7600a5b5c9.tar.gz",
-                "genint.c",  # v0.9: has -keepfeatures and -threshold
+                "https://github.com/jutaipal/genint/archive/226eb7fb7f4719efd78e6207fcc386a0305bbfad.tar.gz",
+                "genint.c",  # v0.9: has -keepfeatures, -threshold, -nofilter, -protect_flanks
             ),
         ]
 
