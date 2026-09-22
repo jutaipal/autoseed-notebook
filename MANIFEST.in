@@ -1,2 +1,3 @@
 include src/autoseed/notebooks/*.ipynb
 recursive-include src/autoseed/bin *
+include src/autoseed/data/80bak.pfm

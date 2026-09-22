@@ -6,9 +6,9 @@ import tarfile
 import urllib.request
 import shutil
 
-from setuptools import setup
+from setuptools import setup, Command
+from setuptools.dist import Distribution
 from setuptools.command.build_py import build_py as _build_py
-from distutils.core import Command
 
 
 class BuildC(Command):
@@ -33,23 +33,23 @@ class BuildC(Command):
         REPOS = [
             (
                 "localmax-motif",
-                "https://github.com/jutaipal/localmax-motif/archive/refs/heads/main.tar.gz",
+                "https://github.com/jutaipal/localmax-motif/archive/6a0360774efdcb584a34d37dc939dbcd23e2178c.tar.gz",
                 "localmax-motif.c",
             ),
             (
                 "seedextender",
-                "https://github.com/jutaipal/seedextender/archive/refs/heads/main.tar.gz",
+                "https://github.com/jutaipal/seedextender/archive/07eb219f800c5ab872281e097b15295c62eef6be.tar.gz",
                 "seedextender.c",
             ),
             (
                 "motifsimilarity",
-                "https://github.com/jutaipal/motifsimilarity/archive/refs/heads/main.tar.gz",
+                "https://github.com/jutaipal/motifsimilarity/archive/33fd7384f77ea785f595a1276904e4fc12cf5e61.tar.gz",
                 "motifsimilarity.c",
             ),
             (
                 "genint-PWM",
-                "https://github.com/jutaipal/genint/archive/refs/heads/newmain.tar.gz",
-                "genint-PWM.c",
+                "https://github.com/jutaipal/genint/archive/7178704ace9c3edf5fe3ad78b6694d7600a5b5c9.tar.gz",
+                "genint.c",  # v0.9: has -keepfeatures and -threshold
             ),
         ]
 
@@ -78,10 +78,17 @@ class BuildC(Command):
 
                 out_path = bin_dir / exe_name
                 print(f"Compiling {c_name} -> {out_path}")
-                cmd = [cc, "-O3", "-std=c11", str(src_path), "-o", str(out_path)]
+                cmd = [cc, "-O3", str(src_path), "-o", str(out_path), "-lm", "-pthread"]
                 subprocess.check_call(cmd)
 
         print("C helper binaries built into", bin_dir)
+
+
+class BinaryDistribution(Distribution):
+    """Mark wheel as platform-specific, since it contains compiled binaries."""
+
+    def has_ext_modules(self):
+        return True
 
 
 class build_py(_build_py):
@@ -94,6 +101,7 @@ class build_py(_build_py):
 
 setup(
     # All metadata / options come from pyproject.toml; we only hook commands here.
+    distclass=BinaryDistribution,
     cmdclass={
         "build_py": build_py,
         "build_c": BuildC,

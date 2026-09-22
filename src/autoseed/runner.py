@@ -11,7 +11,7 @@ def _bin(name: str) -> pathlib.Path:
 
 def localmax(args):
     return subprocess.run(
-        [str(_bin("localmax")), *map(str, args)],
+        [str(_bin("localmax-motif")), *map(str, args)],
         check=True,
         capture_output=True,
         text=True,
@@ -19,7 +19,7 @@ def localmax(args):
 
 def seedext(args):
     return subprocess.run(
-        [str(_bin("seedext")), *map(str, args)],
+        [str(_bin("seedextender")), *map(str, args)],
         check=True,
         capture_output=True,
         text=True,
@@ -27,7 +27,7 @@ def seedext(args):
 
 def sim(args):
     return subprocess.run(
-        [str(_bin("sim")), *map(str, args)],
+        [str(_bin("motifsimilarity")), *map(str, args)],
         check=True,
         capture_output=True,
         text=True,
@@ -35,7 +35,7 @@ def sim(args):
 
 def genint(args):
     return subprocess.run(
-        [str(_bin("genint")), *map(str, args)],
+        [str(_bin("genint-PWM")), *map(str, args)],
         check=True,
         capture_output=True,
         text=True,
